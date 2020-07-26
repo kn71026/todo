@@ -1,0 +1,31 @@
+<ion-header>
+<ion-toolbar color="secondary">
+  <ion-title>
+    Add Item
+  </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-input type="text" [(ngModel)]="description"></ion-input>
+  </ion-item>
+
+</ion-list>
+
+<ion-button fill="solid" color="secondary" (click)="saveItem()">Save</ion-button>
+
+</ion-content>
