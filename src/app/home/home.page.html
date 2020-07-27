@@ -1,22 +1,41 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary" >
-    <ion-buttons slot="primary">
-      <ion-button (click)="addItem()">
-        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Todo!</ion-title>  
+  <ion-toolbar color="secondary" >
+    <ion-title class="title">Todo!</ion-title>  
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-<ion-list>
-  <ion-item *ngFor="let item of items"  >
-    {{item.title}},{{item.description}}
-    <ion-button slot="end" (click)="viewItem(item)">edit</ion-button>
-    <ion-button slot="end" (click)="Delete(item)">delete</ion-button>
-</ion-item>
 
+<ion-content [fullscreen]="true">
+  <div class="ion-text-center">
+    <div class="mytitle">
+      <ion-text color="primary">
+        <h2>
+          Add something todo!
+        </h2>
+      </ion-text>
+      <ion-button [routerLink]="['/add-item']">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+    </div>
+
+<ion-list>
+  <ion-item *ngFor="let item of items" >
+    <ion-checkbox [(ngModel)]="item.done" color="primary" checked slot="start" [checked]="item.done"></ion-checkbox>
+    <ion-label class="mylabel" [routerLink]="['/item-detail', item.id]" [ngClass]="{'done' : item.done}">
+      {{item.title}}
+    </ion-label>
+    <ion-button slot="end" color="danger" (click)="Delete(item)">delete</ion-button>
+</ion-item>
 </ion-list>
+</div>
+<div class="buttonblock">
+  <ion-button class="mybutton" color="success" (click)="markAll()">
+    <ion-label>complete all</ion-label>
+  </ion-button>
+  
+  <ion-button class="mybutton" color="danger" (click)="clearAll()">
+    <ion-label>uncomplete all</ion-label>
+  </ion-button>
+</div> 
 </ion-content>
 

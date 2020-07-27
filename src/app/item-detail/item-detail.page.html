@@ -1,38 +1,24 @@
-<!-- <ion-header>
-  <ion-nav color="secondary">
-    <ion-title>
-      {{data.name}}
-      owo
-    </ion-title>
-  </ion-nav>
-</ion-header>
-
-<ion-content>
-  <ion-card>
-    <ion-card-content>
-      owo
-      {{data.website}}
-    </ion-card-content>
-  </ion-card>
-</ion-content> -->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
+    <ion-title>Update Item</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card-header>
-    <ion-card-title>
-      123
-    </ion-card-title>
-    <ion-card>
-      <ion-card-content>
-        {{ description }}
-      </ion-card-content>
-    </ion-card>
-  </ion-card-header>
+<ion-content *ngIf="item" padding>
+  <div class="ion-text-center">
+  <form [formGroup]="editItemForm" (ngSubmit)="updateItem(editItemForm.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Title</ion-label>
+      <ion-input type="text" formControlName="title" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description" required></ion-input>
+    </ion-item>
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!editItemForm.valid">Update</ion-button>
+  </form>
+</div>
 </ion-content>

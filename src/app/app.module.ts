@@ -8,24 +8,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AddItemPageModule } from './add-item/add-item.module';
-import { ItemDetailPageModule } from './item-detail/item-detail.module';
-import { DataService } from '../app/data.service';
-import { IonicStorageModule } from '@ionic/storage';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [AppComponent ],
+  declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),
-  IonicStorageModule.forRoot({
-      name: 'todo',
-        driverOrder: ['sqlite', 'indexeddb', 'websql']
-    }),
-  AppRoutingModule, AddItemPageModule, ItemDetailPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DataService
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

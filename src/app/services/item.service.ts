@@ -7,37 +7,41 @@ export class ItemService {
 
   items: Array<any> = [
     {
-      'id': "1",
-      'title': "Example 1",
-      'description': 'description 1'
+      id: '1',
+      title: 'Eating',
+      description: 'EatingEating',
+      done: false,
     },
     {
-      'id': "2",
-      'title': "Example 2",
-      'description': 'description 2'
+      id: '2',
+      title: 'Coding',
+      description: 'CodingCoding',
+      done: false,
     },
     {
-      'id': "3",
-      'title': "Example 3",
-      'description': 'description 3'
+      id: '3',
+      title: 'playing',
+      description: 'playingplaying',
+      done: false,
     },
     {
-      'id': "4",
-      'title': "Example 4",
-      'description': 'description 4'
+      id: '4',
+      title: 'sleeping',
+      description: 'sleepingsleeping',
+      done: true,
     },
-  ]
+  ];
 
   constructor() { }
 
   createItem(title, description){
 
-    let randomId = Math.random().toString(36).substr(2, 5);
+    const randomId = Math.random().toString(36).substr(2, 5);
 
     this.items.push({
-      'id': randomId,
-      'title': title,
-      'description': description
+      id: randomId,
+      title,
+      description
     });
   }
 
@@ -50,7 +54,7 @@ export class ItemService {
   }
 
   updateItem(newValues){
-    let itemIndex = this.items.findIndex(item => item.id == newValues.id);
+    const itemIndex = this.items.findIndex(item => item.id === newValues.id);
     this.items[itemIndex] = newValues;
   }
 }

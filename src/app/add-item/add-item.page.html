@@ -1,31 +1,29 @@
 <ion-header>
 <ion-toolbar color="secondary">
-  <ion-title>
+  <ion-title class="title">
     Add Item
   </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="close()">
+    <ion-buttons slot="end" class="mybutton">
+      <ion-button (click)="close()" > 
       <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
-
-<ion-content>
-<ion-list>
-
-  <ion-item>
-    <ion-label position="floating">Title</ion-label>
-    <ion-input type="text" [(ngModel)]="title"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Description</ion-label>
-    <ion-input type="text" [(ngModel)]="description"></ion-input>
-  </ion-item>
-
-</ion-list>
-
-<ion-button fill="solid" color="secondary" (click)="saveItem()">Save</ion-button>
-
+<ion-content padding>
+  <div class="ion-text-center">
+  <form [formGroup]="newItemForm" (submit)="createItem(newItemForm.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Title</ion-label>
+      <ion-input type="text" formControlName="title" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description" required></ion-input>
+    </ion-item>
+    
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!newItemForm.valid">Create</ion-button>
+  </form>
+</div>
 </ion-content>

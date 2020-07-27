@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ItemService } from '../services/item.service';
+import { NavController } from '@ionic/angular';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-item',
@@ -7,23 +11,29 @@ import { NavController, ModalController } from '@ionic/angular';
   styleUrls: ['./add-item.page.scss'],
 })
 export class AddItemPage implements OnInit {
-  title: string;
-  description: string;
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController){}
+
+  public newItemForm: FormGroup;
+
+  constructor(
+    public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+    private itemService: ItemService ){}
 
   ngOnInit() {
+    this.newItemForm = this.formBuilder.group({
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required)
+    });
   }
 
 
-  saveItem(){
-    let newItem = {
-      title: this.title,
-      description: this.description
-    };
-    this.modalCtrl.dismiss(newItem);
+  createItem(value){
+    this.itemService.createItem(value.title, value.description);
+    this.newItemForm.reset();
+    this.close();
   }
 
   close(){
-    this.modalCtrl.dismiss();
+    this.navCtrl.navigateBack('/home');
   }
 }
