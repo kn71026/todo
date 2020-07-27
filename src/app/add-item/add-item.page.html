@@ -13,17 +13,19 @@
 </ion-header>
 <ion-content padding>
   <div class="ion-text-center">
-  <form [formGroup]="newItemForm" (submit)="createItem(newItemForm.value)">
+  <!-- <form [formGroup]="newItemForm" (submit)="createItem(newItemForm.value)"> -->
+    <!-- <form [formGroup]="newItemForm" > -->
+
     <ion-item>
-      <ion-label color="primary" position="floating">Title</ion-label>
-      <ion-input type="text" formControlName="title" required></ion-input>
+      <ion-label color="primary" position="floating" >Title</ion-label>
+      <ion-input type="text"  [(ngModel)]="newItem.title" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary" position="floating">Description</ion-label>
-      <ion-input type="text" formControlName="description" required></ion-input>
+      <ion-label color="primary" position="floating" >Description</ion-label>
+      <ion-input type="text" [(ngModel)]="newItem.description" required></ion-input>
     </ion-item>
-    
-    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!newItemForm.valid">Create</ion-button>
-  </form>
+    <!-- [disabled]="!newItemForm.valid" -->
+    <ion-button class="submit-btn" expand="block" (click)="addItem()" type="submit" >Create</ion-button>
+  <!-- </form> -->
 </div>
 </ion-content>

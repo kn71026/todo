@@ -13,7 +13,7 @@
           Add something todo!
         </h2>
       </ion-text>
-      <ion-button [routerLink]="['/add-item']">
+      <ion-button (click)="nav()">
         <ion-icon slot="icon-only" name="add-circle"></ion-icon>
       </ion-button>
     </div>
@@ -22,9 +22,12 @@
   <ion-item *ngFor="let item of items" >
     <ion-checkbox [(ngModel)]="item.done" color="primary" checked slot="start" [checked]="item.done"></ion-checkbox>
     <ion-label class="mylabel" [routerLink]="['/item-detail', item.id]" [ngClass]="{'done' : item.done}">
-      {{item.title}}
+    {{item.title}},{{item.description}}
     </ion-label>
-    <ion-button slot="end" color="danger" (click)="Delete(item)">delete</ion-button>
+    <p>
+      {{ item.modified | date:'short'}}
+    </p>
+    <ion-button slot="end" color="danger" (click)="DeleteItem(item)">delete</ion-button>
 </ion-item>
 </ion-list>
 </div>

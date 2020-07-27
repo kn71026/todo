@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, ToastController } from '@ionic/angular';
 import { AddItemPage } from '../add-item/add-item.page';
 import { ItemDetailPage  } from '../item-detail/item-detail.page';
 import {OverlayEventDetail} from '@ionic/core';
 import { ActivatedRoute, Router , NavigationExtras} from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { ItemService } from '../services/item.service';
+import { Storage } from '@ionic/storage';
+import { StorageService, Item } from '../services/storage.service';
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
+import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -14,19 +18,23 @@ import { ItemService } from '../services/item.service';
 
 
 export class HomePage{
-  items: Array<any>;
+  // items: Array<any>;
   // filterCondition: TodoStatus | undefined;
-
+  items: Item[] = [];
+  newItem: Item = <Item>{};
 
   constructor(
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     private router: Router,
-    public itemService: ItemService ) {}
+    private storage: Storage,
+    private storageService: StorageService,
+    private toastctrl: ToastController ) {
+    }
 
     // tslint:disable-next-line: use-lifecycle-interface
     ngOnInit(){
-      this.items = this.itemService.getItems();
+      this.loadItems();
     }
   // async addItem(){
   //   const addModal = await this.modalCtrl.create({
@@ -47,16 +55,16 @@ export class HomePage{
   // }
 
 
-  viewItem(item){
-    const navigationExtras: NavigationExtras = {
-      state : {
-      ti: item.title,
-      des: item.description
-    }};
-    // console.log(item.description);
-    // this.router.navigate(['/item-detail'], navigationExtras);
-    this.navCtrl.navigateForward(['/item-detail/'], navigationExtras);
-  }
+  // viewItem(item){
+  //   const navigationExtras: NavigationExtras = {
+  //     state : {
+  //     ti: item.title,
+  //     des: item.description
+  //   }};
+  //   // console.log(item.description);
+  //   // this.router.navigate(['/item-detail'], navigationExtras);
+  //   this.navCtrl.navigateForward(['/item-detail/'], navigationExtras);
+  // }
   Delete(item){
     this.items.splice(this.items.indexOf(item), 1);
   }
@@ -68,5 +76,48 @@ export class HomePage{
     this.items.forEach( item => { item.done = false; });
   }
 
+  // updateItem(item: Item){
+  //   item.modified = Date.now();
+
+  //   this.storageService.updateItem(item).then(item =>{
+  //     this.showToast('Item update!');
+  //     this.loadItems();
+  //   }
+  // }
+  updateItem(){}
+
+
+
+  loadItems(){
+    this.storageService.getItems().then(items => {
+      this.items = items;
+    });
+  }
+
+  DeleteItem(item: Item){
+      this.storageService.deleteItem(item.id).then(item =>{
+        this.showToast('Item remove!');
+        this.loadItems();
+      })
+  }
+
+
+  async showToast(msg){
+    const toast = await this.toastctrl.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  nav(){
+    this.navCtrl.navigateForward('/add-item', {
+      state:
+        () => {
+          alert('驚！ 靖軒太可愛!!!💕');
+          this.loadItems();
+      }
+    });
+  }
 
 }
