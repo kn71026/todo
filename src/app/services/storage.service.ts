@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { ItemService } from './item.service';
 
 export interface Item{
   id: number;
@@ -8,6 +7,7 @@ export interface Item{
   description: string;
   done: boolean;
   modified: number;
+  edit: false;
 }
 
 const ITEMS_KEY = 'my-items';
@@ -21,6 +21,8 @@ export class StorageService {
     private storage: Storage
   ) { }
 
+
+
   addItem(item: Item): Promise<any>{
     return this.storage.get(ITEMS_KEY).then((items: Item[]) =>{
       if (items){
@@ -33,9 +35,32 @@ export class StorageService {
 
   }
 
+  put(changed) {
+    return new Promise(resolve => {
+      const index = Items.findIndex(todo => todo === changed);
+      Items[index].title = changed.title;
+      resolve(changed);
+    });
+  }
+  getTodos(query = ''){
+    return this.todoService.get(query).then(todos => {
+      this.todos = todos;
+      this.activeTasks = this.todos.filter(todo => !todo.isDone).length;
+    });
+  }
+  
   getItems(): Promise<Item[]> {
     return this.storage.get(ITEMS_KEY);
   }
+
+  getItemsById(id: number): Promise<Item> {
+    return this.storage.get(ITEMS_KEY).then((items: Item[])=>{
+      console.log(typeof(id));
+
+      return items.find(item => item.id === id);
+    });
+  }
+
 
   updateItem(item: Item): Promise<any>{
     return this.storage.get(ITEMS_KEY).then((items: Item[]) =>{
@@ -47,6 +72,7 @@ export class StorageService {
       let newItems: Item[] = [];
 
       for (let i of items){
+        
         if (i.id === item.id ){
           newItems.push(item);
         }else{

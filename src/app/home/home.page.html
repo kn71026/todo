@@ -21,12 +21,21 @@
 <ion-list>
   <ion-item *ngFor="let item of items" >
     <ion-checkbox [(ngModel)]="item.done" color="primary" checked slot="start" [checked]="item.done"></ion-checkbox>
-    <ion-label class="mylabel" [routerLink]="['/item-detail', item.id]" [ngClass]="{'done' : item.done}">
-    {{item.title}},{{item.description}}
+    <ion-label class="mylabel" (click)="nav2(item.id)" [ngClass]="{'done' : item.done}">
+    <!-- <ion-label class="mylabel" [ngClass]="{'done' : item.done, editing: item.edit}" (dblclick)="todo.editing = true" > -->
+      {{item.title}},{{item.description}}
     </ion-label>
     <p>
       {{ item.modified | date:'short'}}
     </p>
+    <!-- <ion-button slot="end" color="success" (click)="updateItem(item)">up</ion-button> -->
+    <!-- <input class="edit"
+         #updatedTodo
+         [value]="item.title"
+         (blur)="updateTodo(item, updatedTodo.value)"
+         (keyup.escape)="item.editing = false"
+         (keyup.enter)="updateTodo(item, updatedTodo.value)"> -->
+         
     <ion-button slot="end" color="danger" (click)="DeleteItem(item)">delete</ion-button>
 </ion-item>
 </ion-list>

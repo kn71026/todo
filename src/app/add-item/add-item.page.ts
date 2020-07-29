@@ -4,7 +4,6 @@ import { ItemService } from '../services/item.service';
 import { NavController } from '@ionic/angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService, Item } from '../services/storage.service';
-import { ExecFileOptionsWithBufferEncoding } from 'child_process';
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.page.html',
@@ -37,11 +36,11 @@ export class AddItemPage implements OnInit {
   }
 
 
-  createItem(value){
-    this.itemService.createItem(value.title, value.description);
-    this.newItemForm.reset();
-    this.close();
-  }
+  // createItem(value){
+  //   this.itemService.createItem(value.title, value.description);
+  //   this.newItemForm.reset();
+  //   this.close();
+  // }
 
   close(){
     this.navCtrl.navigateBack('/home');

@@ -18,10 +18,6 @@ import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils
 
 
 export class HomePage{
-  // items: Array<any>;
-  // filterCondition: TodoStatus | undefined;
-  items: Item[] = [];
-  newItem: Item = <Item>{};
 
   constructor(
     private navCtrl: NavController,
@@ -31,6 +27,12 @@ export class HomePage{
     private storageService: StorageService,
     private toastctrl: ToastController ) {
     }
+  // items: Array<any>;
+  // filterCondition: TodoStatus | undefined;
+  items: Item[] = [];
+  newItem: Item = <Item>{};
+
+  newName: string;
 
     // tslint:disable-next-line: use-lifecycle-interface
     ngOnInit(){
@@ -65,9 +67,9 @@ export class HomePage{
   //   // this.router.navigate(['/item-detail'], navigationExtras);
   //   this.navCtrl.navigateForward(['/item-detail/'], navigationExtras);
   // }
-  Delete(item){
-    this.items.splice(this.items.indexOf(item), 1);
-  }
+  // Delete(item){
+  //   this.items.splice(this.items.indexOf(item), 1);
+  // }
 
   markAll(done: boolean) {
     this.items.forEach( item => { item.done = true; });
@@ -77,15 +79,36 @@ export class HomePage{
   }
 
   // updateItem(item: Item){
+  //   item.title = `Update: ${item.title}`;
   //   item.modified = Date.now();
 
-  //   this.storageService.updateItem(item).then(item =>{
+  //   this.storageService.updateItem(item).then(item => {
   //     this.showToast('Item update!');
   //     this.loadItems();
-  //   }
+  //   });
   // }
-  updateItem(){}
 
+
+  // updateTodo(todo, newValue) {
+  //   todo.title = newValue;
+  //   return this.storage.get(todo).then(() => {
+  //     todo.editing = false;
+  //     return this.getTodos();
+  //   });
+  // }
+  
+
+  // select(item: Item, input: HTMLInputElement) {
+  //   if (item.done) { return; }
+  //   item.select = true;
+  //   this.newName = item.title;
+  //   setTimeout(() => input.focus(), 0);
+  // }
+
+  // rename(item: Item, newName: string) {
+  //   item.title = newName;
+  //   //item.selected = false;
+  // }
 
 
   loadItems(){
@@ -98,7 +121,7 @@ export class HomePage{
       this.storageService.deleteItem(item.id).then(item =>{
         this.showToast('Item remove!');
         this.loadItems();
-      })
+      });
   }
 
 
@@ -114,10 +137,19 @@ export class HomePage{
     this.navCtrl.navigateForward('/add-item', {
       state:
         () => {
-          alert('驚！ 靖軒太可愛!!!💕');
           this.loadItems();
       }
     });
   }
+
+  nav2(itemId){
+    this.navCtrl.navigateForward('/item-detail/' + itemId , {
+      state:
+        () => {
+          this.loadItems();
+        }
+    });
+  }
+
 
 }
