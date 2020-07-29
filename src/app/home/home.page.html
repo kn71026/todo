@@ -22,7 +22,7 @@
   <ion-item *ngFor="let item of items" >
     <ion-checkbox [(ngModel)]="item.done" color="primary" checked slot="start" [checked]="item.done"></ion-checkbox>
     <ion-label class="my_label" (click)="nav2detail(item.id)" [ngClass]="{'done' : item.done}">
-      {{item.title}},{{item.description}}
+      {{item.title}}&nbsp;&nbsp;{{item.description}}
     </ion-label>
     <p class="my_date">
       {{ item.modified | date:'short'}}

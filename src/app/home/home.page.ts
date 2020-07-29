@@ -32,10 +32,10 @@ export class HomePage{
       this.loadItems();
     }
 
-  markAll(done: boolean) {
+  markAll() {
     this.items.forEach( item => { item.done = true; });
   }
-  clearAll(done: boolean) {
+  clearAll() {
     this.items.forEach( item => { item.done = false; });
   }
 
