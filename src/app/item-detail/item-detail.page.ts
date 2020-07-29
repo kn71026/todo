@@ -54,7 +54,7 @@ export class ItemDetailPage implements OnInit {
       this.item.description = this.des;
       this.item.modified = Date.now() ;
 
-      this.storageService.updateItem(this.item).then(item =>{
+      this.storageService.updateItem(this.item).then(item => {
         this.callback();
       });
       this.goBack();

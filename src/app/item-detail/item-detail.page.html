@@ -9,9 +9,6 @@
 
 <ion-content padding>
   <div class="ion-text-center">
-  <!-- <form [formGroup]="newItemForm" (submit)="createItem(newItemForm.value)"> -->
-    <!-- <form [formGroup]="newItemForm" > -->
-
     <ion-item>
       <ion-label color="primary" position="floating" >Title</ion-label>
       <ion-input type="text"  [(ngModel)]="title" required></ion-input>
@@ -20,8 +17,6 @@
       <ion-label color="primary" position="floating" >Description</ion-label>
       <ion-input type="text" [(ngModel)]="des" required></ion-input>
     </ion-item>
-    <!-- [disabled]="!newItemForm.valid" -->
     <ion-button class="submit-btn" expand="block" (click)="updateItem()" type="submit" >update</ion-button>
-  <!-- </form> -->
 </div>
 </ion-content>

@@ -7,13 +7,13 @@
 
 <ion-content [fullscreen]="true">
   <div class="ion-text-center">
-    <div class="mytitle">
+    <div class="my_title">
       <ion-text color="primary">
         <h2>
           Add something todo!
         </h2>
       </ion-text>
-      <ion-button (click)="nav()">
+      <ion-button (click)="nav2add()">
         <ion-icon slot="icon-only" name="add-circle"></ion-icon>
       </ion-button>
     </div>
@@ -21,32 +21,23 @@
 <ion-list>
   <ion-item *ngFor="let item of items" >
     <ion-checkbox [(ngModel)]="item.done" color="primary" checked slot="start" [checked]="item.done"></ion-checkbox>
-    <ion-label class="mylabel" (click)="nav2(item.id)" [ngClass]="{'done' : item.done}">
-    <!-- <ion-label class="mylabel" [ngClass]="{'done' : item.done, editing: item.edit}" (dblclick)="todo.editing = true" > -->
+    <ion-label class="my_label" (click)="nav2detail(item.id)" [ngClass]="{'done' : item.done}">
       {{item.title}},{{item.description}}
     </ion-label>
-    <p>
+    <p class="my_date">
       {{ item.modified | date:'short'}}
     </p>
-    <!-- <ion-button slot="end" color="success" (click)="updateItem(item)">up</ion-button> -->
-    <!-- <input class="edit"
-         #updatedTodo
-         [value]="item.title"
-         (blur)="updateTodo(item, updatedTodo.value)"
-         (keyup.escape)="item.editing = false"
-         (keyup.enter)="updateTodo(item, updatedTodo.value)"> -->
-         
     <ion-button slot="end" color="danger" (click)="DeleteItem(item)">delete</ion-button>
 </ion-item>
 </ion-list>
 </div>
-<div class="buttonblock">
-  <ion-button class="mybutton" color="success" (click)="markAll()">
+<div class="button_block">
+  <ion-button class="my_button" color="success" (click)="markAll()">
     <ion-label>complete all</ion-label>
   </ion-button>
   
-  <ion-button class="mybutton" color="danger" (click)="clearAll()">
-    <ion-label>uncomplete all</ion-label>
+  <ion-button class="my_button" color="danger" (click)="clearAll()">
+    <ion-label>uncompleted all</ion-label>
   </ion-button>
 </div> 
 </ion-content>

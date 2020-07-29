@@ -42,7 +42,7 @@
   font-size: 40px;
   padding: 10px;
 }
-.mytitle{
+.my_title{
   display: flex;
   padding-right: 20px;
   padding-left: 20px;
@@ -50,11 +50,11 @@
   border-bottom: 1px solid rgba(101, 198, 223, 0.623);
 }
 
-.mylabel{
+.my_label{
   padding: 10px;
 }
 
-.mylabel:hover{
+.my_label:hover{
   cursor: pointer;
   padding: 10px;
 }
@@ -64,12 +64,18 @@
 	text-decoration: line-through;
 }
 
-.buttonblock{  
+.button_block{  
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.mybutton{
+.my_button{
   margin: 30px;
 }
 
+.my_date{
+  font-size: 12px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  color:gray;
+}

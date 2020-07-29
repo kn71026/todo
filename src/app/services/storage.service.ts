@@ -21,10 +21,8 @@ export class StorageService {
     private storage: Storage
   ) { }
 
-
-
   addItem(item: Item): Promise<any>{
-    return this.storage.get(ITEMS_KEY).then((items: Item[]) =>{
+    return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
       if (items){
         items.push(item);
         return this.storage.set(ITEMS_KEY, items);
@@ -34,27 +32,12 @@ export class StorageService {
     });
 
   }
-
-  put(changed) {
-    return new Promise(resolve => {
-      const index = Items.findIndex(todo => todo === changed);
-      Items[index].title = changed.title;
-      resolve(changed);
-    });
-  }
-  getTodos(query = ''){
-    return this.todoService.get(query).then(todos => {
-      this.todos = todos;
-      this.activeTasks = this.todos.filter(todo => !todo.isDone).length;
-    });
-  }
-  
   getItems(): Promise<Item[]> {
     return this.storage.get(ITEMS_KEY);
   }
 
   getItemsById(id: number): Promise<Item> {
-    return this.storage.get(ITEMS_KEY).then((items: Item[])=>{
+    return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
       console.log(typeof(id));
 
       return items.find(item => item.id === id);
@@ -63,7 +46,7 @@ export class StorageService {
 
 
   updateItem(item: Item): Promise<any>{
-    return this.storage.get(ITEMS_KEY).then((items: Item[]) =>{
+    return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
       if (!items || items.length === 0){
         return null;
       }
@@ -72,7 +55,6 @@ export class StorageService {
       let newItems: Item[] = [];
 
       for (let i of items){
-        
         if (i.id === item.id ){
           newItems.push(item);
         }else{
@@ -85,7 +67,7 @@ export class StorageService {
   }
 
   deleteItem(id: number): Promise<Item>{
-    return this.storage.get(ITEMS_KEY).then((items: Item[]) =>{
+    return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
       if (!items || items.length === 0){
         return null;
       }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { ItemService } from '../services/item.service';
 import { NavController } from '@ionic/angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService, Item } from '../services/storage.service';
@@ -16,7 +15,6 @@ export class AddItemPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    private itemService: ItemService,
     private storageService: StorageService,
     private router: Router,
     ){
@@ -25,7 +23,7 @@ export class AddItemPage implements OnInit {
       }
     }
     items: Item[] = [];
-    newItem: Item = <Item>{};
+    newItem: Item = {} as Item;
 
 
   ngOnInit() {
@@ -52,8 +50,8 @@ export class AddItemPage implements OnInit {
     this.newItem.id = Date.now();
     this.newItem.modified =  Date.now();
 
-    this.storageService.addItem(this.newItem).then(item =>{
-      this.newItem = <Item>{};
+    this.storageService.addItem(this.newItem).then(item => {
+      this.newItem = ({} as Item);
       this.callback();
     });
     this.close();
